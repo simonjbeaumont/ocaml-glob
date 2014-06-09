@@ -30,17 +30,14 @@ let matches_glob glob x =
 		| _, [] | _, [""] -> true 
 		| i, [g] -> (* need to find a match that matches to end of string *)
 			find_substrings ~start_point:i g x
-			|> List.map (fun j -> j + String.length g = String.length x)
-			|> List.fold_left (||) false
+			|> List.exists (fun j -> j + String.length g = String.length x)
 		| 0, ""::g::gs ->
 			find_substrings g x
-			|> List.map (fun j -> contains_all_sections ((j + (String.length g)), gs))
-			|> List.fold_left (||) false
+			|> List.exists (fun j -> contains_all_sections ((j + (String.length g)), gs))
 		| i, g::gs ->
 			find_substrings ~start_point:i g x
-			|> List.map (fun j ->
+			|> List.exists (fun j ->
 				(if i = 0 then j = 0 else true)
 				&& contains_all_sections ((j + (String.length g)), gs))
-			|> List.fold_left (||) false
 	in
 	contains_all_sections (0, (split '*' glob))
