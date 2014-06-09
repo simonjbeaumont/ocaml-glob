@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: d1d4cfd6467f3833cf51a75a2a272add)
+version = "0.0.1"
+description =
+"Pure OCaml implementation of some glob-based library functions"
+archive(byte) = "glob.cma"
+archive(byte, plugin) = "glob.cma"
+archive(native) = "glob.cmxa"
+archive(native, plugin) = "glob.cmxs"
+exists_if = "glob.cma"
+# OASIS_STOP
+
